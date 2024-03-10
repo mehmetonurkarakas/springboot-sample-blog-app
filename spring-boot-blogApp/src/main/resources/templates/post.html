@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog : Post</title>
+</head>
+<body>
+<div class="container">
+    <h1 th:text="${post.title}">Head</h1>
+    <hr/>
+    <div class="posts-container">
+            <p th:text="${post.body}">
+                Body Text
+            </p>
+            <br>
+        <a th:href="@{'/'}">
+            Home
+        </a>
+        <h3 th:text="'Author : '  +${post.account.getFirstName()}+' '+${post.account.getLastName()}" ></h3>
+    </div>
+    <hr/>
+    <ul sec:authorize = "isAuthenticated()">
+        <li><a th:href="@{'/posts/'+${post.id}+'/edit'}">Edit</a></li>
+        <li><a th:href="@{'/posts/'+${post.id}+'/delete'}">Delete</a></li>
+    </ul>
+</div>
+</body>
+</html>
